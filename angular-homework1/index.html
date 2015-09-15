@@ -8,6 +8,8 @@
     <script src="js/angular-resource.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/iconGL.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="js/controllers.js"></script>
 </head>
 <body>
@@ -59,7 +61,7 @@
                 <td>{{person.address.city}}</td>
                 <td>{{changePhone(person.phoneNumber)}}</td>
                 <td>
-                    <button class="btn btn-default">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#myModal">
                         <i class="ws-icon-gl-pencil"></i>
                     </button>
                 </td>
@@ -67,6 +69,27 @@
             </tbody>
         </table>
     </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 </div>
 </body>
 </html>
