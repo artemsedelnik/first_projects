@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Controllers">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/angular-resource.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/iconGL.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+</head>
+<body>
+<div id="container"  ng-controller="UsersCtrl">
+    <div id="head" class="col-md-3 col-md-offset-2">
+        <h1>Lesson 2. Homework</h1>
+        <button class="btn btn-default" ng-click="toggleContent($event)">Show lesson content</button>
+    </div>
+
+    <div id="content" class="col-md-7 col-md-offset-2" ng-show="isContentShowed">
+        <hr>
+        <input type="text" id="filter" class="form-control" placeholder="Enter text to filter persons" size="20" ng-model="search">
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">First Name</a>
+                    <i ng-show="sortType == 'firstName' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                    <i ng-show="sortType == 'firstName' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+                </th>
+                <th>
+                    <a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Last Name</a>
+                    <i ng-show="sortType == 'lastName' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                    <i ng-show="sortType == 'lastName' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+                </th>
+                <th>
+                    <a ng-click="sortType = 'age'; sortReverse = !sortReverse">Age</a>
+                    <i ng-show="sortType == 'age' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                    <i ng-show="sortType == 'age' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+                </th>
+                <th>
+                    <a ng-click="sortType = 'address.city'; sortReverse = !sortReverse">City</a>
+                    <i ng-show="sortType == 'address.city' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                    <i ng-show="sortType == 'address.city' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+                </th>
+                <th>
+                    <select class="form-control" ng-model="typeOfNumber">
+                        <option value="home">Home Phone Number</option>
+                        <option value="fax">Fax Number</option>
+                    </select>
+                </th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="person in persons | filter: search | orderBy: sortType: sortReverse">
+                <td>{{person.firstName}}</td>
+                <td>{{person.lastName}}</td>
+                <td>{{person.age}}</td>
+                <td>{{person.address.city}}</td>
+                <td>{{changePhone(person.phoneNumber)}}</td>
+                <td>
+                    <button class="btn btn-default" ng-click="showPopup(person)" >
+                        <i class="ws-icon-gl-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <span class="col-md-7 col-md-offset-2 lastViewedPerson" ng-show="lastViewedPerson">Last viewed: {{lastViewedPerson}}</span>
+    <custom-modal  ok-text="Submit" cancel-text="Cancel" show="showModal"  modal-header="header" onsubmit="submit()" oncancel="cancel()"></custom-modal>
+</div>
+</body>
+</html>
