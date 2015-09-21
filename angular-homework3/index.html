@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Controllers">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/angular-resource.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/iconGL.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+</head>
+<body>
+<div id="container"  ng-controller="UsersCtrl">
+    <div id="head" class="col-md-3 col-md-offset-2">
+        <h1>Lesson 3. Homework</h1>
+        <button class="btn btn-default" ng-click="toggleContent($event)">Show lesson content</button>
+    </div>
+    <div id="content" class="col-md-7 col-md-offset-2" ng-show="isContentShowed">
+
+        <ng-view></ng-view>
+
+    </div>
+
+</div>
+</body>
+</html>

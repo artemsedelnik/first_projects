@@ -1,0 +1,53 @@
+
+    <hr>
+    <input type="text" id="filter" class="form-control" placeholder="Enter text to filter persons" size="20" ng-model="search">
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Last Name</a>
+                <i ng-show="sortType == 'lastName' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                <i ng-show="sortType == 'lastName' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+            </th>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">First Name</a>
+                <i ng-show="sortType == 'firstName' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                <i ng-show="sortType == 'firstName' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+            </th>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'age'; sortReverse = !sortReverse">Age</a>
+                <i ng-show="sortType == 'age' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                <i ng-show="sortType == 'age' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+            </th>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'address.city'; sortReverse = !sortReverse">City</a>
+                <i ng-show="sortType == 'address.city' && !sortReverse" class="ws-icon-gl-chevron-down"></i>
+                <i ng-show="sortType == 'address.city' && sortReverse" class="ws-icon-gl-chevron-up"></i>
+            </th>
+            <th>
+                <select class="form-control" ng-model="typeOfNumber">
+                    <option value="home">Home Number</option>
+                    <option value="fax">Fax Number</option>
+                </select>
+            </th>
+            <th class="col-sm-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="person in persons | filter: search | orderBy: sortType: sortReverse">
+            <td><a href="#/person/{{person.id}}">{{person.lastName}}</a></td>
+            <td>{{person.firstName}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.address.city}}</td>
+            <td>{{changePhone(person.phoneNumber, typeOfNumber)}}</td>
+            <td>
+                <button class="btn btn-default" ng-click="showPopup(person)" >
+                    <i class="ws-icon-gl-pencil"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<span class="lastViewedPerson" ng-show="lastViewedPerson">Last viewed: {{lastViewedPerson}}</span>
+<custom-modal  ok-text="Submit" cancel-text="Cancel" show="showModal"  modal-header="header" onsubmit="submit()" oncancel="cancel()"></custom-modal>

@@ -1,0 +1,68 @@
+        <h1>Edit Person: {{fullName}}</h1>
+        <hr>
+        <form name="personForm" ng-submit="personForm.$valid && updatePerson()" novalidate>
+
+            <div class="row">
+                <div class="col-md-6" ng-class="{'has-error error' : clickUpdate && personForm.age.$invalid}">
+                    <span class="editPerson" >Age *</span>
+                    <input type="number" name="age" class="form-control" ng-model="editingPerson.age" min="1" max="199" required>
+                    <div ng-show="clickUpdate">
+                        <p ng-show="personForm.age.$error.required">Age is required.</p>
+                        <p ng-show="personForm.age.$error.min">Age should be more than 0.</p>
+                        <p ng-show="personForm.age.$error.max">Unfortunately 199 years is our current system limit. Please contact Laws of Nature in case of questions.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <span class="editPerson">Postal Code</span>
+                    <input type="text" class="form-control" ng-model="editingPerson.address.postalCode">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" >
+                    <span class="editPerson">Street</span>
+                    <input type="text" class="form-control" ng-model="editingPerson.address.streetAddress">
+                </div>
+                <div class="col-md-6" ng-class="{'has-error error' : clickUpdate && personForm.$submitted && personForm.homeNumber.$invalid}">
+                    <span class="editPerson">Home Number *</span>
+                    <input type="text" name="homeNumber" class="form-control" ng-model="phoneHome" ng-pattern="/^(\d{3}[-.\s]*){2}\d{4}$/" required>
+                    <div ng-show="clickUpdate">
+                        <p ng-show="personForm.homeNumber.$error.required">Phone is required.</p>
+                        <p ng-show="personForm.homeNumber.$error.pattern">Please enter correct Phone (10 digits).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" ng-class="{'has-error error' : clickUpdate && personForm.$submitted && personForm.city.$invalid}">
+                    <span class="editPerson">City *</span>
+                    <input type="text" name="city" class="form-control" ng-model="editingPerson.address.city" ng-minlength="3" ng-maxlength="50" required>
+                    <div ng-show="clickUpdate">
+                        <p ng-show="personForm.city.$error.required">City is required.</p>
+                        <p ng-show="personForm.city.$error.minlength">City name should be more than 3 characters.</p>
+                        <p ng-show="personForm.city.$error.maxlength">City name should be less than 50 characters.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-class="{'has-error error' : clickUpdate && personForm.$submitted && personForm.faxNumber.$invalid}">
+                    <span class="editPerson">Fax Number *</span>
+                    <input type="text" name="faxNumber" class="form-control" ng-model="phoneFax" ng-pattern="/^(\d{3}[-.\s]*){2}\d{4}$/" required>
+                    <div ng-show="clickUpdate">
+                        <p ng-show="personForm.faxNumber.$error.required">Phone is required.</p>
+                        <p ng-show="personForm.faxNumber.$error.pattern">Please enter correct Phone (10 digits).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" >
+                    <span class="editPerson">State</span>
+                    <input type="text" class="form-control" ng-model="editingPerson.address.state">
+                </div>
+            </div>
+            <hr>
+            <div class="text-right">
+                <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary" ng-model="clickUpdate" ng-click="clickUpdate = true" ng-disabled="!isPersonChanged()">Update</button>
+                <p ng-show="clickUpdate && !personForm.$valid" class="error"> Please correct errors in the form above.</p>
+            </div>
+        </form>

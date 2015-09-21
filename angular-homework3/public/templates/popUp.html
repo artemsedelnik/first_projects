@@ -1,0 +1,23 @@
+<div id="popup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{fullName}}</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Age: </strong>{{person.age}}</p>
+                <p><strong>Street: </strong>{{person.address.streetAddress}}</p>
+                <p><strong>City: </strong>{{person.address.city}}</p>
+                <p><strong>State: </strong>{{person.address.state}}</p>
+                <p><strong>Postal code: </strong>{{person.address.postalCode}}</p>
+                <p><strong>Home phone: </strong>{{phoneHome}}</p>
+                <p><strong>Fax phone: </strong>{{phoneFax}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="oncancel()">{{cancelText}}</button>
+                <button type="button" class="btn btn-primary" ng-click="onsubmit()">{{okText}}</button>
+            </div>
+        </div>
+    </div>
+</div>
