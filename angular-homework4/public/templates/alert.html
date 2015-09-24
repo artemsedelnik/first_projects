@@ -1,0 +1,5 @@
+<div class="alert alert-dismissible" ng-class="{'alert-success' : isUpdatedSuccess, 'alert-danger' : !isUpdatedSuccess}" role="alert">
+    <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="showAlert = false">&times;</span></button>
+    <strong ng-if="isUpdatedSuccess">Update was successful!</strong>
+    <strong ng-if="!isUpdatedSuccess">Server Error!</strong>
+</div>
