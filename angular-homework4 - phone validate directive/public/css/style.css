@@ -1,0 +1,26 @@
+input#filter{
+    width: 200px;
+}
+
+span.lastViewedPerson{
+    color: #880000;
+    font-weight: bolder;
+}
+
+span.editPerson{
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+a{
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+
+.error{
+    color: darkred;
+}
+
+.rowDiv{
+    margin-bottom: 5px;
+}
