@@ -1,0 +1,64 @@
+    <hr>
+    <input type="text" id="filter" class="form-control" placeholder="Enter text to filter persons" size="20" ng-model="search">
+    <hr>
+    <alert show="showAlert"></alert>
+    <div class="myGrid" ui-grid="gridOptions"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Last Name</a>
+                <i ng-show="sortType == 'lastName' && !sortReverse" class="ws-icon-gl-chevron-down black"></i>
+                <i ng-show="sortType == 'lastName' && sortReverse" class="ws-icon-gl-chevron-up black"></i>
+            </th>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">First Name</a>
+                <i ng-show="sortType == 'firstName' && !sortReverse" class="ws-icon-gl-chevron-down black"></i>
+                <i ng-show="sortType == 'firstName' && sortReverse" class="ws-icon-gl-chevron-up black"></i>
+            </th>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'age'; sortReverse = !sortReverse">Age</a>
+                <i ng-show="sortType == 'age' && !sortReverse" class="ws-icon-gl-chevron-down black"></i>
+                <i ng-show="sortType == 'age' && sortReverse" class="ws-icon-gl-chevron-up black"></i>
+            </th>
+            <th class="col-sm-2">
+                <a ng-click="sortType = 'address.city'; sortReverse = !sortReverse">City</a>
+                <i ng-show="sortType == 'address.city' && !sortReverse" class="ws-icon-gl-chevron-down black"></i>
+                <i ng-show="sortType == 'address.city' && sortReverse" class="ws-icon-gl-chevron-up black"></i>
+            </th>
+            <th>
+                <select class="form-control" ng-model="typeOfNumber">
+                    <option value="home">Home Number</option>
+                    <option value="fax">Fax Number</option>
+                </select>
+            </th>
+            <th class="col-sm-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="person in persons | filter: search | orderBy: sortType: sortReverse">
+            <td><a href="#/person/{{person.id}}">{{person.lastName}}</a></td>
+            <td>{{person.firstName}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.address.city}}</td>
+            <td>{{changePhone(person.phoneNumber, typeOfNumber)}}</td>
+            <td>
+                <button class="btn btn-default" ng-click="editCtrl.showPopup(person)" >
+                    <i class="ws-icon-gl-pencil black"></i>
+                </button>
+                <button class="btn btn-default" ng-click="deleteCtrl.showDeletePopup(person)" >
+                    <i class="ws-icon-gl-trash black"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<span class="lastViewedPerson" ng-show="lastViewedPerson">Last viewed: {{lastViewedPerson}}</span>
+<custom-modal  ok-text="Submit" cancel-text="Cancel" show="editCtrl.showModal" updateFunction="editCtrl.updatePerson()" oncancel="editCtrl.cancel()"></custom-modal>
+<add-person-modal ok-text="Submit" cancel-text="Cancel" show="addCtrl.showAddModal"  addFunction="addCtrl.addPerson()" oncancel="addCtrl.cancel()"></add-person-modal>
+<delete-person-modal ok-text="Delete" cancel-text="Cancel" show="deleteCtrl.showDeleteModal"  deleteFunction="deleteCtrl.deletePerson()" oncancel="deleteCtrl.cancel()"></delete-person-modal>
+<hr>
+<button ng-click="addCtrl.showAddPopup()" type="button" class="btn btn-primary ng-scope">
+        <i class="ws-icon-gl-plus white"></i>
+        Add New Person
+</button>

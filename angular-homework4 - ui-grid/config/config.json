@@ -1,0 +1,22 @@
+{
+    "port": 8888,
+    "mongoose": {
+        "uri": "mongodb://localhost/angular_users",
+        "options": {
+            "server": {
+                "socketOptions": {
+                    "keepAlive": 1
+                }
+            }
+        }
+    },
+    "session": {
+        "secret": "KillerIsJim",
+        "key": "sid",
+        "cookie": {
+            "path": "/",
+            "httpOnly": true,
+            "maxAge": null
+        }
+    }
+}

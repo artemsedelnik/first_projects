@@ -1,0 +1,17 @@
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Delete Person</h4>
+            </div>
+            <div class="modal-body">
+               Are you sure you want to remove <strong>{{deleteCtrl.deletedPerson.firstName + ' ' + deleteCtrl.deletedPerson.lastName}}</strong> from the list?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="deleteCtrl.oncancel()">{{deleteCtrl.cancelText}}</button>
+                <button type="submit" class="btn btn-primary" ng-click="deleteCtrl.deletefunction()">{{deleteCtrl.okText}}</button>
+            </div>
+        </div>
+    </div>
+</div>

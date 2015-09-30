@@ -1,0 +1,76 @@
+<form name="addPersonForm" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="rowDiv" ng-class="{'has-error error' : addPersonForm.$submitted && addPersonForm.firstName.$invalid}">
+                <span class="editPerson" >First Name *</span>
+                <input type="text" name="firstName" class="form-control" ng-model="addCtrl.newPerson.firstName" required>
+                <div ng-show="addPersonForm.$submitted">
+                    <p ng-show="addPersonForm.firstName.$error.required">First name is required.</p>
+                </div>
+            </div>
+            <div class="rowDiv" ng-class="{'has-error error' : addPersonForm.$submitted && addPersonForm.lastName.$invalid}">
+                <span class="editPerson" >Last Name *</span>
+                <input type="text" name="lastName" class="form-control" ng-model="addCtrl.newPerson.lastName" required>
+                <div ng-show="addPersonForm.$submitted">
+                    <p ng-show="addPersonForm.lastName.$error.required">Last name is required.</p>
+                </div>
+            </div>
+            <div class="rowDiv" ng-class="{'has-error error' : addPersonForm.$submitted && addPersonForm.age.$invalid}">
+                <span class="editPerson" >Age *</span>
+                <input type="number" name="age" class="form-control" ng-model="addCtrl.newPerson.age" min="1" max="199" required>
+                <div ng-show="addPersonForm.$submitted">
+                    <p ng-show="addPersonForm.age.$error.required">Age is required.</p>
+                    <p ng-show="addPersonForm.age.$error.min">Age should be more than 0.</p>
+                    <p ng-show="addPersonForm.age.$error.max">Unfortunately 199 years is our current system limit. Please contact Laws of Nature in case of questions.</p>
+                </div>
+            </div>
+            <div class="rowDiv">
+                <span class="editPerson">Street</span>
+                <input type="text" class="form-control" ng-model="addCtrl.newPerson.address.streetAddress">
+            </div>
+            <div class="rowDiv" ng-class="{'has-error error' : addPersonForm.$submitted && addPersonForm.city.$invalid}">
+                <span class="editPerson">City *</span>
+                <input type="text" name="city" class="form-control" ng-model="addCtrl.newPerson.address.city" ng-minlength="3" ng-maxlength="50" required>
+                <div ng-show="addPersonForm.$submitted">
+                    <p ng-show="addPersonForm.city.$error.required">City is required.</p>
+                    <p ng-show="addPersonForm.city.$error.minlength">City name should be more than 3 characters.</p>
+                    <p ng-show="addPersonForm.city.$error.maxlength">City name should be less than 50 characters.</p>
+                </div>
+            </div>
+        </div> <!-- col-md-6-->
+
+        <div class="col-md-6">
+            <div class="rowDiv">
+                <span class="editPerson">State</span>
+                <input type="text" class="form-control" ng-model="addCtrl.newPerson.address.state">
+            </div>
+            <div class="rowDiv">
+                <span class="editPerson">Postal Code</span>
+                <input type="text" class="form-control" ng-model="addCtrl.newPerson.address.postalCode">
+            </div>
+            <div class="rowDiv" ng-class="{'has-error error' : addPersonForm.$submitted && addPersonForm.homeNumber.$invalid}">
+                <span class="editPerson">Home Number *</span>
+                <input type="text" name="homeNumber" class="form-control" ng-model="addCtrl.phones.phoneHome" phone-validate required><!--phone-validate added-->
+                <div ng-show="addPersonForm.$submitted">
+                    <p ng-show="addPersonForm.homeNumber.$error.required">Phone is required.</p>
+                    <p ng-show="addPersonForm.homeNumber.$error.phoneValidate">Please enter correct Phone (10 digits).</p>
+                </div>
+            </div>
+            <div class="rowDiv" ng-class="{'has-error error' : addPersonForm.$submitted && addPersonForm.faxNumber.$invalid}">
+                <span class="editPerson">Fax Number *</span>
+                <input type="text" name="faxNumber" class="form-control" ng-model="addCtrl.phones.phoneFax" ng-pattern="/^(\d{3}[-.\s]*){2}\d{4}$/" phone-validate required><!--phone-validate added-->
+                <div ng-show="addPersonForm.$submitted">
+                    <p ng-show="addPersonForm.faxNumber.$error.required">Phone is required.</p>
+                    <p ng-show="addPersonForm.faxNumber.$error.pattern">Please enter correct Phone (10 digits).</p>
+                </div>
+            </div>
+        </div> <!-- col-md-6-->
+    </div><!-- row -->
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="addCtrl.oncancel()">{{addCtrl.cancelText}}</button>
+        <button type="submit" class="btn btn-primary" ng-click="addPersonForm.$valid && addCtrl.addfunction()" ng-disabled="addPersonForm.$pristine">{{addCtrl.okText}}</button>
+        <p ng-show="addPersonForm.$submitted && !addPersonForm.$valid" class="error"> Please correct errors in the form above.</p>
+    </div>
+
+</form>
